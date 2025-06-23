@@ -82,3 +82,57 @@ This repository outlines how ransomware works, common attack vectors, and provid
 🧪 Example Scripts & Tools
 
    Feel free to review the PowerShell script to identify suspicious file extensions and encryption patterns.
+
+# 🛠️ Detect-Ransomware.ps1 – Script Overview
+
+### This PowerShell script is designed to help administrators detect potential ransomware activity by scanning for:
+
+   - Suspicious file extensions commonly used by ransomware
+
+   - High-entropy files, which often indicate encrypted or obfuscated content
+
+    ⚠️ This is a detection aid, not a prevention tool. It's best used as part of a layered defense strategy.
+
+### 🔍 What It Does
+
+   - Scans Directories
+
+        - Monitors configurable paths (e.g., C:\Users, D:\Data)
+
+        - Recursively checks all files in those directories
+
+   - Detects Suspicious Extensions
+
+        - Flags files with extensions like .locked, .crypt, .enc, etc.
+
+        - Outputs any matches to the console
+
+   - Estimates File Entropy (Optional)
+
+        - Reads byte frequency of each file
+
+        - Estimates Shannon entropy: a value > 7.5 typically suggests encryption
+
+        - Flags high-entropy files with a red warning
+
+   - Logs Activity
+
+        - Writes human-readable console alerts for each detection
+
+        - Skips unreadable or locked files silently to avoid interruptions
+
+### ⚙️ How to Use
+
+  #### - Step 1: Run PowerShell as Administrator
+  #### - Step 2: Execute the script
+   - .\Detect-Ransomware.ps1
+
+         Modify the $PathsToMonitor array to scan custom locations.
+
+### 📁 Output Example
+
+- 🔍 Starting ransomware detection scan...
+- ⚠️ Suspicious file detected: C:\Users\testuser\Documents\budget.xlsx.locked
+- 🔒 High-entropy (possibly encrypted) file: C:\Users\testuser\Pictures\photo.jpg.enc | Entropy: 7.98
+- ✅ Scan completed.
+
